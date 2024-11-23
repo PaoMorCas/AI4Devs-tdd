@@ -2,6 +2,7 @@ import { PrismaClient, Prisma } from '@prisma/client';
 import { Education } from './Education';
 import { WorkExperience } from './WorkExperience';
 import { Resume } from './Resume';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 
 const prisma = new PrismaClient();
 
@@ -82,7 +83,7 @@ export class Candidate {
                 });
             } catch (error: any) {
                 console.log(error);
-                if (error instanceof Prisma.PrismaClientInitializationError) {
+                if (error instanceof PrismaClientKnownRequestError) {
                     // Database connection error
                     throw new Error('No se pudo conectar con la base de datos. Por favor, asegúrese de que el servidor de base de datos esté en ejecución.');
                 } else if (error.code === 'P2025') {
@@ -100,7 +101,7 @@ export class Candidate {
                 });
                 return result;
             } catch (error: any) {
-                if (error instanceof Prisma.PrismaClientInitializationError) {
+                if (error instanceof PrismaClientKnownRequestError) {
                     // Database connection error
                     throw new Error('No se pudo conectar con la base de datos. Por favor, asegúrese de que el servidor de base de datos esté en ejecución.');
                 } else {

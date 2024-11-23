@@ -11,7 +11,7 @@ const validateName = (name: string) => {
     }
 };
 
-const validateEmail = (email: string) => {
+export const validateEmail = (email: string) => {
     if (!email || !EMAIL_REGEX.test(email)) {
         throw new Error('Invalid email');
     }
